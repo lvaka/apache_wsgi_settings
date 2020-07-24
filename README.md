@@ -9,7 +9,8 @@ WSGI App for Flask app.wsgi in root.
  
     This WSGI app loads the virtual environment before loading the app as an application.  
     If you set this up in Apache or NGINX/gunicorn instead, you can skip everything until 
-    the last line.
+    the last line.  Make sure to use a Python 3 mod for Apache, otherwise virtualenv won't 
+    work.
 """ 
 import os 
 import sys 
@@ -18,7 +19,7 @@ app_path = 'exact system path to app root. ie /var/www/wsgi'
 virtualenv_name = 'name of your vitualenv, I usually just name mine env'
 env_activate = os.path.join(app_path, virtualenv_name, 'bin', 'activate_this.py')
  
-with open(env_activate) as file:
+with open(env_activate) as file_:
     exec(file_.read(), dict(__file__=env_activate)) 
  
 sys.path.insert(0, app_path)
